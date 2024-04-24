@@ -12,10 +12,11 @@ my $builder = t::lib::TestBuilder->new();
 while( my $library = $libraries->next) {
     my $several = int( rand(10) )+10;
     for( my $i = 0; $i < $several; $i++ ){
-        my $holder = Koha::Patrons->find(int(rand(50))+1 );
-        my $biblio = Koha::Biblios->find(312);#int(rand(432))+1 );
+        my $holder = Koha::Patrons->search({},{'order_by'=>\"rand()"})->next;
+        my $biblio = Koha::Biblios->search({},{'order_by'=>\"rand()"})->next;
         next unless $biblio;
         my $item = $biblio->items->search({},{ order_by => \["rand()"] })->next;
+        # Below is to set a 50/50 chance of creating an item level versus next available hold
         my $itemnumber = $item && int( rand(2) ) ? $item->itemnumber : undef;
         my $hold = $builder->build_object({
             class => "Koha::Holds",
