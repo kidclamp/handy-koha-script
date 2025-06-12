@@ -11,6 +11,10 @@ $patron = Koha::Patrons->find({cardnumber=>23529000035676});
 $patron->userid("henry")->store;
 $patron->set_password({password=>"ace"});
 
+$patron = Koha::Patrons->find({cardnumber=>23529000050113});
+$patron->userid("jordan")->store;
+$patron->set_password({password=>"alford"});
+
 $patron = Koha::Patrons->find({cardnumber=>23529000139858});
 $patron->userid("ronnie")->store;
 $patron->set_password({password=>"ballard"});

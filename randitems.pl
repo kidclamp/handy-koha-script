@@ -17,14 +17,14 @@ push @withdrawn, 0;
 push @damaged, 0;
 push @notforloans, 0;
 my @callnumbers = ('FIC','NF','J','YA');
-my $biblios = Koha::Biblios->search({biblionumber => 3});
+my $biblios = Koha::Biblios->search({biblionumber=>3});
 my $builder = t::lib::TestBuilder->new(); 
 
 while( my $biblio = $biblios->next) {
-    my $several = 100;#int( rand(10) ) * 10;
+    my $several = 150;#int( rand(10) ) * 10;
     for( my $i = 0; $i < $several; $i++ ){
         my $dewey = $i%2 ? " ".int(rand(1000))." " : " " ;
-        my $call = $callnumbers[rand @callnumbers] . "$dewey" . substr($biblio->    author,0,3);
+        my $call = $callnumbers[rand @callnumbers] . "$dewey" . substr($biblio->author,0,3);
         my $homelibrary = $branchcodes[rand @branchcodes ];
         my $holdlibrary = $branchcodes[rand @branchcodes ];
         my $item = $builder->build_sample_item({

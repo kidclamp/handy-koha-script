@@ -2,6 +2,7 @@
 use t::lib::TestBuilder;
 use Koha::Libraries;
 use Koha::Holds;
+use Koha::Old::Holds;
 use Koha::Patrons;
 use Koha::DateUtils qw(dt_from_string);
 

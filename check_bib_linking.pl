@@ -11,6 +11,8 @@ GetOptions(
     "b|biblionumber=s" => \$biblionumber
 );
 
+die "You must supply a --biblionumber option" unless $biblionumber;
+
 warn "Using linker ".C4::Context->preference("LinkerModule");
 warn "Options " . C4::Context->preference("LinkerOptions");
 
