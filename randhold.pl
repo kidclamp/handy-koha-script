@@ -19,6 +19,7 @@ GetOptions(
 );
 
 $count //= 10;
+my $count_placed = 0;
 my $biblio_params = {};
 my $borrower_params = {};
 $biblio_params->{biblionumber} = $biblionumber if $biblionumber;
@@ -58,6 +59,8 @@ while( my $library = $libraries->next) {
                 patron_expiration_date => undef,
             }
         });
+        $count_placed++;
+        exit if $count_placed >= $count;
     }
 }
 
