@@ -5,6 +5,17 @@ use Koha::Holds;
 use Koha::Patrons;
 use Koha::DateUtils;
 
+use Getopt::Long;
+use Modern::Perl;
+
+my $biblionumber;
+my $borrowernumber;
+my $count;
+
+GetOptions(
+    "b|biblionumber=i" => \$biblionumber,
+    "n|number=i" => \$count,
+);
 
 my @branchcodes = Koha::Libraries->search()->get_column('branchcode');
 my @itypes = Koha::ItemTypes->search()->get_column('itemtype');
@@ -17,11 +28,12 @@ push @withdrawn, 0;
 push @damaged, 0;
 push @notforloans, 0;
 my @callnumbers = ('FIC','NF','J','YA');
-my $biblios = Koha::Biblios->search({biblionumber=>3});
+my $bib_params = $biblionumber? { biblionumber =>  $biblionumber } : {};
+my $biblios = Koha::Biblios->search($bib_params);
 my $builder = t::lib::TestBuilder->new(); 
 
 while( my $biblio = $biblios->next) {
-    my $several = 150;#int( rand(10) ) * 10;
+    my $several = $count ? $count : int( rand(10) ) * 10;
     for( my $i = 0; $i < $several; $i++ ){
         my $dewey = $i%2 ? " ".int(rand(1000))." " : " " ;
         my $call = $callnumbers[rand @callnumbers] . "$dewey" . substr($biblio->author,0,3);

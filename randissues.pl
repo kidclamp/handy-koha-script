@@ -45,6 +45,7 @@ while( my $library = $libraries->next) {
                 unseen_renewals => 0,
                 returndate => undef,
                 branchcode  => $library->branchcode,
+                checkin_library => undef
             }
         });
     }
