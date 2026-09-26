@@ -4,5 +4,5 @@ sudo apt update
 sudo apt install locate libcarp-always-perl
 sudo updatedb
 
-cat custom.sql | sudo koha-mysql kohadev
+cat /kohadevbox/koha/shared/custom.sql | sudo koha-mysql kohadev
 perl /kohadevbox/koha/handy/setup.pl
